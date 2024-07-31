@@ -1,38 +1,42 @@
-﻿namespace AppDemoWeek5
+﻿class TestClass
 {
-    abstract class Shape
+    public abstract class Shape
     {
-        public abstract int GetArea();
+        public const double PI = Math.PI;
+        //protected double _x, _y;
+        //public Shape(double x, double y)
+        //{
+        //    _x = x;
+        //    _y = y;
+        //}
+        public abstract double Area();
     }
-    class Square : Shape
+    public class Circle : Shape
     {
-        private int _side;
-        public Square(int n) => _side = n;
-
-        // GetArea method is required to avoid a compile-time error.
-        public override int GetArea() => _side * _side;
+        //private double r;
+        //public Circle(double _r) => r = _r;
+        public double R { get; set; }
+        public override double Area() => PI * R * R;
     }
-    class Rectangle : Shape
+    public class Cylinder : Shape
     {
-        private int _width;
-        private int _length;
-        public Rectangle(int width, int length)
-        {
-            _width = width;
-            _length = length;
-        }
-        public override int GetArea() => _width * _length;
+        //private double r, h;
+        //public Cylinder(double _r, double _h)
+        //{
+        //    r = _r;
+        //    h = _h;
+        //}
+        public double R { get; set;}
+        public double H { get; set;}
+        public override double Area() => 2 * PI * R * R + 2 * PI * R * H;
     }
-    internal class Program
+    static void Main()
     {
-        static void Main()
-        {
-            Object[] shapes = { new Square(5), new Rectangle(3, 4)  };
-            Console.WriteLine($"Area of the square = {((Shape)shapes[0]).GetArea()}");
-            var sq = new Square(4);
-            var rc = new Rectangle(5, 4);
-            Console.WriteLine($"Area of the square = {sq.GetArea()}");
-            Console.WriteLine($"Area of the rectangle = {rc.GetArea()}");
-        }
+        double r = 3.0, h = 5.0;
+        Shape c = new Circle() { R = r };
+        Shape l = new Cylinder() { R=r, H=h};
+        // Display results
+        Console.WriteLine("Area of Circle   = {0:F1}", c.Area());
+        Console.WriteLine("Area of Cylinder = {0:F2}", l.Area());
     }
 }
